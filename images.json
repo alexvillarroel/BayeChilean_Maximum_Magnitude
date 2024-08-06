@@ -1,0 +1,8 @@
+{"__comment__": "JSON file specifying the image to use for a given type/name and resolution. Read in by cartopy.mpl.geoaxes.read_user_background_images.",
+    "NaturalEarthRelief": {
+      "__comment__": "Natural Earth I with shaded Relief, water, and drainage",
+      "__source__": "https://naciscdn.org/naturalearth/50m/raster/NE2_50M_SR_W.zip",
+      "__projection__": "PlateCarree",
+      "high": "NE2_50M_SR_W.tif"
+    }
+}
