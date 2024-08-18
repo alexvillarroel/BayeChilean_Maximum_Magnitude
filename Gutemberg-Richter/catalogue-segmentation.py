@@ -21,13 +21,14 @@ import matplotlib.cm as cm
 # pip install rockhound
 import rockhound as rh
 import os
-os.environ["CARTOPY_USER_BACKGROUNDS"] = '/home/alex/Maximum_Magnitude/'
+route = os.getcwd()
+os.environ["CARTOPY_USER_BACKGROUNDS"] = '/home/alex/BayeChilean_Maximum_Magnitude/'
 
 def isc_read(filename,segmento):
     """
     Read a catalogue from a file and return a pandas DataFrame.
     """
-    data=pd.read_csv('/home/alex/Maximum_Magnitude/Gutemberg-Richter/catalogues/isc-gem-cat.csv', sep=',',date_parser=lambda x: pd.to_datetime(x, format=' %Y-%m-%d %H:%M:%S.%f '),parse_dates=['#         date          '],skiprows=109)
+    data=pd.read_csv('/home/alex/BayeChilean_Maximum_Magnitude/Gutemberg-Richter/catalogues/isc-gem-cat.csv', sep=',',date_parser=lambda x: pd.to_datetime(x, format=' %Y-%m-%d %H:%M:%S.%f '),parse_dates=['#         date          '],skiprows=109)
     new_columns = ['date', 'lat', 'lon', 'smajax', 'sminax', 'strike', 'q', 'depth',
     'unc', 'q', 'mw', 'unc', 'q', 's', 'mo', 'fac', 'mo_auth', 'mpp',
     'mpr', 'mrr', 'mrt', 'mtp', 'mtt', 'str1', 'dip1', 'rake1',
@@ -120,9 +121,8 @@ for idx, segmento in enumerate(CATALOGOS.SEGMENTO):
     sizes = 1.2*2**mag # Multiplicar por un factor para ajustar el tamaño
     # Graficar los puntos con colores y tamaños
     ax.scatter(lon, lat, transform=ccrs.PlateCarree(), c=colors, s=sizes)
-
-
-ax.set_title('Subduction seismicity in Chile \nISC Catalogue (Mw>=5.0, 1906-2020)')
+figure_title='Subduction seismicity in Chile \nISC Catalogue (Mw>=5.0, 1906-2020)'
+ax.set_title(figure_title)
 
 # Añadir barra de colores
 sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
@@ -138,5 +138,4 @@ handles = [Line2D([0], [0], marker='o', color='w', markerfacecolor='gray', marke
 ax.legend(handles=handles, loc='lower center', ncol=3,title='Simbology',fancybox=True,bbox_to_anchor=(0.5, -0.15))
 
 # Mostrar el gráfico
-fig.savefig('seismicity-ISC.png',dpi=300)
-fig.show()
+plt.savefig('seismicity-ISC.png',dpi=300)
